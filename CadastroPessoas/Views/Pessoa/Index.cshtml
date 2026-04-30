@@ -1,100 +1,203 @@
 ﻿@{
-    ViewBag.Title = "Cadastro de Pessoas";
+    Layout = null;
 }
 
-<h2>Cadastro de Pessoas</h2>
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cadastro - Registro de Pessoas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#283044", "primary": "#003ec7", "surface-container-high": "#e2e7ff",
+                        "on-tertiary": "#ffffff", "surface-dim": "#d2d9f4", "inverse-primary": "#b7c4ff",
+                        "on-primary-fixed": "#001452", "tertiary": "#952200", "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#0038b6", "on-background": "#131b2e", "on-tertiary-container": "#ffddd5",
+                        "tertiary-fixed-dim": "#ffb4a1", "on-tertiary-fixed": "#3c0800", "surface": "#faf8ff",
+                        "on-secondary-fixed-variant": "#38485d", "primary-fixed-dim": "#b7c4ff", "outline": "#737688",
+                        "surface-container": "#eaedff", "on-secondary-fixed": "#0b1c30", "primary-container": "#0052ff",
+                        "on-surface": "#131b2e", "surface-container-low": "#f2f3ff", "on-secondary-container": "#54647a",
+                        "secondary": "#505f76", "on-primary": "#ffffff", "primary-fixed": "#dde1ff",
+                        "on-tertiary-fixed-variant": "#891e00", "on-error-container": "#93000a", "surface-variant": "#dae2fd",
+                        "inverse-on-surface": "#eef0ff", "on-error": "#ffffff", "on-surface-variant": "#434656",
+                        "on-secondary": "#ffffff", "secondary-container": "#d0e1fb", "surface-tint": "#004ced",
+                        "surface-container-highest": "#dae2fd", "background": "#faf8ff", "tertiary-fixed": "#ffdbd2",
+                        "tertiary-container": "#bf3003", "surface-bright": "#faf8ff", "on-primary-container": "#dfe3ff",
+                        "secondary-fixed": "#d3e4fe", "outline-variant": "#c3c5d9", "secondary-fixed-dim": "#b7c8e1",
+                        "error": "#ba1a1a", "error-container": "#ffdad6"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"], "h3": ["Inter"], "body-md": ["Inter"], "body-sm": ["Inter"],
+                        "label-sm": ["Inter"], "h1": ["Inter"], "h2": ["Inter"], "body-lg": ["Inter"], "h4": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-['Inter'] text-on-background">
 
-<div class="panel panel-default">
-    <div class="panel-heading">Dados da Pessoa</div>
-    <div class="panel-body">
-        <form data-bind="submit: salvar">
-            <div class="row">
-                <div class="col-md-4 form-group">
-                    <label>Nome *</label>
-                    <input type="text" class="form-control" data-bind="value: Nome" required maxlength="100" />
-                </div>
-                <div class="col-md-4 form-group">
-                    <label>E-mail *</label>
-                    <input type="email" class="form-control" data-bind="value: Email" required maxlength="150" />
-                </div>
-                <div class="col-md-4 form-group">
-                    <label>Data de Nascimento *</label>
-                    <input type="date" class="form-control" data-bind="value: DataNascimento" required />
-                </div>
+    <header class="bg-surface-container-lowest border-b border-surface-container-highest shadow-sm z-50 sticky top-0 flex justify-between items-center px-6 py-4 w-full">
+        <div class="flex items-center gap-6">
+            <span class="text-xl font-bold text-on-surface tracking-tight">Cadastro de Pessoas</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button data-bind="click: limparFormulario" class="bg-primary text-on-primary text-sm font-semibold py-2 px-4 rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                Novo Cadastro
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 justify-center w-full">
+        <main class="flex-1 p-6 xl:p-8 max-w-[1280px] w-full overflow-y-auto">
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-on-surface mb-2">Pessoas</h1>
+                <p class="text-base text-on-surface-variant">Preencha os detalhes para registrar uma nova pessoa ou gerencie a lista abaixo.</p>
             </div>
 
-            <hr />
-            <h4>Endereço</h4>
-            <div class="row">
-                <div class="col-md-3 form-group">
-                    <label>CEP *</label>
-                    <input type="text" id="Cep" class="form-control" data-bind="value: Cep, valueUpdate: 'afterkeydown'" required />
-                </div>
-                <div class="col-md-7 form-group">
-                    <label>Logradouro *</label>
-                    <input type="text" class="form-control" data-bind="value: Logradouro" required maxlength="150" />
-                </div>
-                <div class="col-md-2 form-group">
-                    <label>Número *</label>
-                    <input type="text" id="Numero" class="form-control" data-bind="value: Numero" required maxlength="20" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 form-group">
-                    <label>Complemento</label>
-                    <input type="text" class="form-control" data-bind="value: Complemento" maxlength="100" />
-                </div>
-                <div class="col-md-3 form-group">
-                    <label>Bairro *</label>
-                    <input type="text" class="form-control" data-bind="value: Bairro" required maxlength="100" />
-                </div>
-                <div class="col-md-4 form-group">
-                    <label>Cidade *</label>
-                    <input type="text" class="form-control" data-bind="value: Cidade" required maxlength="100" />
-                </div>
-                <div class="col-md-1 form-group">
-                    <label>UF *</label>
-                    <input type="text" class="form-control" data-bind="value: Uf" required maxlength="2" />
-                </div>
-            </div>
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
 
-            <button type="submit" class="btn btn-success">Salvar</button>
-            <button type="button" class="btn btn-default" data-bind="click: limparFormulario">Cancelar</button>
-        </form>
+                <div class="xl:col-span-4 flex flex-col gap-8">
+                    <form data-bind="submit: salvar" class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6 shadow-sm flex flex-col gap-6">
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-on-surface mb-4 pb-2 border-b border-surface-container">Dados da Pessoa</h3>
+                            <div class="flex flex-col gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="name">Nome Completo *</label>
+                                    <input data-bind="value: Nome" id="name" required maxlength="100" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="Ex: João da Silva" type="text" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="email">E-mail *</label>
+                                    <input data-bind="value: Email" id="email" required maxlength="150" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="email@exemplo.com" type="email" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="dob">Data de Nascimento *</label>
+                                    <input data-bind="value: DataNascimento" id="dob" required class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" type="date" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-on-surface mb-4 pb-2 border-b border-surface-container">Endereço</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="cep">CEP *</label>
+                                    <div class="flex">
+                                        <input data-bind="value: Cep, valueUpdate: 'afterkeydown'" id="Cep" required class="w-full border-outline-variant rounded-l-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="00000-000" type="text" />
+                                        <button class="bg-surface-container border border-l-0 border-outline-variant rounded-r-md px-2 text-on-surface-variant hover:bg-surface-variant transition-colors" type="button">
+                                            <span class="material-symbols-outlined text-[20px]">search</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="logradouro">Logradouro *</label>
+                                    <input data-bind="value: Logradouro" id="logradouro" required maxlength="150" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="Rua, Avenida, etc." type="text" />
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="numero">Número *</label>
+                                    <input data-bind="value: Numero" id="Numero" required maxlength="20" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="123" type="text" />
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="complemento">Complemento</label>
+                                    <input data-bind="value: Complemento" id="complemento" maxlength="100" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="Apto, Sala" type="text" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="bairro">Bairro *</label>
+                                    <input data-bind="value: Bairro" id="bairro" required maxlength="100" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="Bairro" type="text" />
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="cidade">Cidade *</label>
+                                    <input data-bind="value: Cidade" id="cidade" required maxlength="100" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base" placeholder="Cidade" type="text" />
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="uf">UF *</label>
+                                    <input data-bind="value: Uf" id="uf" required maxlength="2" class="w-full border-outline-variant rounded-md px-4 py-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary bg-surface-bright text-base uppercase" placeholder="SP" type="text" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 mt-2 pt-4 border-t border-surface-container">
+                            <button data-bind="click: limparFormulario" class="px-4 py-2 rounded-md text-sm font-semibold text-on-surface bg-surface-container hover:bg-surface-variant transition-colors border border-outline-variant focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">Cancelar</button>
+                            <button class="px-4 py-2 rounded-md text-sm font-semibold text-on-primary bg-primary hover:bg-on-primary-fixed-variant transition-colors shadow-sm focus:ring-2 focus:ring-primary focus:ring-offset-2" type="submit">Salvar Registro</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="xl:col-span-8 flex flex-col">
+                    <div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl shadow-sm overflow-hidden flex-1 flex flex-col">
+                        <div class="p-6 border-b border-surface-container flex justify-between items-center bg-surface-bright">
+                            <h3 class="text-xl font-semibold text-on-surface">Pessoas Cadastradas</h3>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                                <input data-bind="value: termoBusca, valueUpdate: 'afterkeydown'" class="pl-10 pr-4 py-1.5 border-outline-variant rounded-full text-sm focus:border-primary focus:ring-1 focus:ring-primary bg-surface w-64" placeholder="Buscar por nome ou e-mail..." type="text" />
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-surface-container-low border-b border-surface-container">
+                                    <tr>
+                                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Nome</th>
+                                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">E-mail</th>
+                                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Nascimento</th>
+                                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Localização</th>
+                                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider text-right">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: pessoasFiltradas" class="divide-y divide-surface-container text-sm text-on-surface bg-surface-container-lowest">
+                                    <tr class="hover:bg-surface-bright transition-colors group">
+                                        <td class="px-6 py-4 font-medium" data-bind="text: Nome"></td>
+                                        <td class="px-6 py-4 text-on-surface-variant" data-bind="text: Email"></td>
+                                        <td class="px-6 py-4 text-on-surface-variant" data-bind="text: new Date(DataNascimento).toLocaleDateString('pt-BR', {timeZone: 'UTC'})"></td>
+                                        <td class="px-6 py-4">
+                                            <span data-bind="if: Endereco" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-xs font-semibold">
+                                                <span data-bind="text: Endereco.Cidade"></span>, <span data-bind="text: Endereco.Uf"></span>
+                                            </span>
+                                            <span data-bind="ifnot: Endereco" class="text-xs text-on-surface-variant italic">Nenhum</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button data-bind="click: $parent.editar" class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded transition-colors" title="Editar">
+                                                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                                                </button>
+                                                <button data-bind="click: $parent.excluir" class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors" title="Excluir">
+                                                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody data-bind="visible: pessoasFiltradas().length === 0">
+                                    <tr>
+                                        <td colspan="5" class="px-6 py-8 text-center text-on-surface-variant">
+                                            Nenhum registro encontrado.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="p-4 border-t border-surface-container bg-surface flex justify-between items-center mt-auto">
+                            <span class="text-sm text-on-surface-variant">
+                                Mostrando <span data-bind="text: pessoasFiltradas().length"></span> registro(s)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-</div>
 
-<hr />
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Nascimento</th>
-            <th>Cidade/UF</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody data-bind="foreach: pessoas">
-        <tr>
-            <td data-bind="text: Nome"></td>
-            <td data-bind="text: Email"></td>
-            <td data-bind="text: new Date(DataNascimento).toLocaleDateString('pt-BR')"></td>
-            <td>
-                <span data-bind="if: Endereco">
-                    <span data-bind="text: Endereco.Cidade"></span>/<span data-bind="text: Endereco.Uf"></span>
-                </span>
-            </td>
-            <td>
-                <button class="btn btn-primary btn-sm" data-bind="click: $parent.editar">Editar</button>
-                <button class="btn btn-danger btn-sm" data-bind="click: $parent.excluir">Excluir</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
@@ -118,11 +221,21 @@
 
             self.pessoas = ko.observableArray([]);
 
+            self.termoBusca = ko.observable('');
+            self.pessoasFiltradas = ko.computed(function () {
+                var filtro = self.termoBusca().toLowerCase();
+                if (!filtro) return self.pessoas();
+
+                return ko.utils.arrayFilter(self.pessoas(), function (pessoa) {
+                    var nomeMatch = pessoa.Nome && pessoa.Nome.toLowerCase().indexOf(filtro) !== -1;
+                    var emailMatch = pessoa.Email && pessoa.Email.toLowerCase().indexOf(filtro) !== -1;
+                    return nomeMatch || emailMatch;
+                });
+            });
+
             self.Cep.subscribe(function (novoCep) {
                 if (!novoCep) return;
-
                 var cepLimpo = novoCep.replace(/\D/g, '');
-
                 if (cepLimpo.length === 8) {
                     $.getJSON('https://viacep.com.br/ws/' + cepLimpo + '/json/', function (dados) {
                         if (!("erro" in dados)) {
@@ -131,8 +244,6 @@
                             self.Cidade(dados.localidade);
                             self.Uf(dados.uf);
                             $('#Numero').focus();
-                        } else {
-                            alert("CEP não encontrado.");
                         }
                     });
                 }
@@ -140,100 +251,64 @@
 
             self.listar = function () {
                 $.get('/Pessoa/Listar', function (dados) {
-                    var pessoasFormatadas = dados.map(function (p) {
+                    var formatados = dados.map(function (p) {
                         if (p.DataNascimento) {
                             var dateMsec = parseInt(p.DataNascimento.replace(/[^0-9]/g, ""));
-                            var d = new Date(dateMsec);
-                            p.DataNascimento = d.toISOString().split('T')[0];
+                            p.DataNascimento = new Date(dateMsec).toISOString().split('T')[0];
                         }
                         return p;
                     });
-                    self.pessoas(pessoasFormatadas);
+                    self.pessoas(formatados);
                 });
             };
 
             self.salvar = function () {
-                var pessoaData = {
-                    Id: self.Id(),
-                    Nome: self.Nome(),
-                    Email: self.Email(),
-                    DataNascimento: self.DataNascimento(),
+                var data = {
+                    Id: self.Id(), Nome: self.Nome(), Email: self.Email(), DataNascimento: self.DataNascimento(),
                     Endereco: {
-                        Id: self.EnderecoId(),
-                        Cep: self.Cep(),
-                        Logradouro: self.Logradouro(),
-                        Numero: self.Numero(),
-                        Complemento: self.Complemento(),
-                        Bairro: self.Bairro(),
-                        Cidade: self.Cidade(),
-                        Uf: self.Uf()
+                        Id: self.EnderecoId(), Cep: self.Cep(), Logradouro: self.Logradouro(),
+                        Numero: self.Numero(), Complemento: self.Complemento(), Bairro: self.Bairro(),
+                        Cidade: self.Cidade(), Uf: self.Uf()
                     }
                 };
 
-                $.post('/Pessoa/Salvar', pessoaData, function (resposta) {
+                $.post('/Pessoa/Salvar', data, function (resposta) {
                     if (resposta.sucesso) {
-                        alert(resposta.mensagem);
                         self.limparFormulario();
                         self.listar();
+                        alert("✅ " + resposta.mensagem);
                     } else {
-                        alert("Atenção: " + resposta.mensagem);
+                        alert("⚠️ " + resposta.mensagem);
                     }
                 });
             };
 
             self.editar = function (pessoa) {
-                self.Id(pessoa.Id);
-                self.Nome(pessoa.Nome);
-                self.Email(pessoa.Email);
-                self.DataNascimento(pessoa.DataNascimento);
-
+                self.Id(pessoa.Id); self.Nome(pessoa.Nome); self.Email(pessoa.Email); self.DataNascimento(pessoa.DataNascimento);
                 if (pessoa.Endereco) {
-                    self.EnderecoId(pessoa.Endereco.Id || 0);
-                    self.Cep(pessoa.Endereco.Cep);
-                    self.Logradouro(pessoa.Endereco.Logradouro);
-                    self.Numero(pessoa.Endereco.Numero);
-                    self.Complemento(pessoa.Endereco.Complemento);
-                    self.Bairro(pessoa.Endereco.Bairro);
-                    self.Cidade(pessoa.Endereco.Cidade);
-                    self.Uf(pessoa.Endereco.Uf);
+                    self.EnderecoId(pessoa.Endereco.Id || 0); self.Cep(pessoa.Endereco.Cep); self.Logradouro(pessoa.Endereco.Logradouro);
+                    self.Numero(pessoa.Endereco.Numero); self.Complemento(pessoa.Endereco.Complemento); self.Bairro(pessoa.Endereco.Bairro);
+                    self.Cidade(pessoa.Endereco.Cidade); self.Uf(pessoa.Endereco.Uf);
                 } else {
-                    self.EnderecoId(0);
-                    self.Cep('');
-                    self.Logradouro('');
-                    self.Numero('');
-                    self.Complemento('');
-                    self.Bairro('');
-                    self.Cidade('');
-                    self.Uf('');
+                    self.EnderecoId(0); self.Cep(''); self.Logradouro(''); self.Numero('');
+                    self.Complemento(''); self.Bairro(''); self.Cidade(''); self.Uf('');
                 }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             };
 
             self.excluir = function (pessoa) {
                 if (confirm('Tem certeza que deseja excluir ' + pessoa.Nome + '?')) {
                     $.post('/Pessoa/Excluir', { id: pessoa.Id }, function (resposta) {
-                        if (resposta.sucesso) {
-                            self.listar();
-                        } else {
-                            alert(resposta.mensagem);
-                        }
+                        if (resposta.sucesso) self.listar();
+                        else alert("❌ " + resposta.mensagem);
                     });
                 }
             };
 
             self.limparFormulario = function () {
-                self.Id(0);
-                self.Nome('');
-                self.Email('');
-                self.DataNascimento('');
-
-                self.EnderecoId(0);
-                self.Cep('');
-                self.Logradouro('');
-                self.Numero('');
-                self.Complemento('');
-                self.Bairro('');
-                self.Cidade('');
-                self.Uf('');
+                self.Id(0); self.Nome(''); self.Email(''); self.DataNascimento('');
+                self.EnderecoId(0); self.Cep(''); self.Logradouro(''); self.Numero('');
+                self.Complemento(''); self.Bairro(''); self.Cidade(''); self.Uf('');
             };
 
             self.listar();
@@ -241,8 +316,8 @@
 
         $(document).ready(function () {
             $('#Cep').mask('00000-000');
-
             ko.applyBindings(new PessoaViewModel());
         });
     </script>
-}
+</body>
+</html>
